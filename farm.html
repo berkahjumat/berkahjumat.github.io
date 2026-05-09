@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BJFarm – Berkah Jum'at Grup</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hijau: #1a4731; --hijau-muda: #2d6a4f;
+    --emas: #c9a84c; --emas-muda: #e8c96a;
+    --krem: #f8f4ed; --putih: #ffffff; --teks-abu: #555;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--krem); }
+  nav { background: var(--hijau); display: flex; align-items: center; justify-content: space-between; padding: 1rem 2.5rem; }
+  .logo { font-family: 'Playfair Display', serif; color: var(--emas); font-size: 1.2rem; font-weight: 700; text-decoration: none; }
+  .logo span { color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 400; margin-left: 0.5rem; font-family: 'DM Sans', sans-serif; }
+
+  .hero { background: var(--hijau); padding: 5rem 2.5rem 4rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 500px; height: 500px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.1); }
+  .unit-badge { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--emas-muda); font-size: 0.75rem; letter-spacing: 0.15em; padding: 0.35rem 1rem; border-radius: 2px; margin-bottom: 1.25rem; text-transform: uppercase; position: relative; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--putih); font-weight: 700; line-height: 1.2; margin-bottom: 1rem; position: relative; }
+  .hero h1 em { font-style: italic; color: var(--emas); }
+  .hero p { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.8; max-width: 560px; margin: 0 auto 2.5rem; position: relative; }
+  .wa-btn { display: inline-flex; align-items: center; gap: 0.6rem; background: #25D366; color: white; padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: background 0.2s; position: relative; }
+  .wa-btn:hover { background: #1ebe5d; }
+  .wa-icon { width: 20px; height: 20px; fill: white; }
+
+  /* TAB */
+  .tab-wrap { background: var(--putih); border-bottom: 1px solid rgba(26,71,49,0.1); }
+  .tab-menu { display: flex; max-width: 1100px; margin: 0 auto; overflow-x: auto; }
+  .tab-btn { flex: 1; min-width: 130px; padding: 1rem 0.5rem; text-align: center; font-size: 0.85rem; font-weight: 500; cursor: pointer; border: none; background: none; color: var(--teks-abu); border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+  .tab-btn.active { color: var(--hijau); border-bottom-color: var(--emas); }
+  .tab-btn:hover { color: var(--hijau); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .layanan { padding: 4.5rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+  .section-label { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+  .section-label::before { content: ''; width: 30px; height: 1px; background: var(--emas); }
+  .section-label span { font-size: 0.75rem; color: var(--hijau-muda); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 500; }
+  .layanan h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--hijau); margin-bottom: 0.75rem; }
+  .layanan > p { color: var(--teks-abu); font-size: 0.95rem; line-height: 1.75; margin-bottom: 2.5rem; max-width: 640px; }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+  .card { background: var(--putih); border: 1px solid rgba(26,71,49,0.08); border-radius: 4px; padding: 1.75rem; transition: transform 0.25s; position: relative; overflow: hidden; }
+  .card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--emas); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+  .card:hover { transform: translateY(-4px); }
+  .card:hover::after { transform: scaleX(1); }
+  .card-icon { font-size: 1.75rem; margin-bottom: 1rem; }
+  .card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--hijau); margin-bottom: 0.6rem; }
+  .card p { font-size: 0.85rem; color: var(--teks-abu); line-height: 1.7; }
+  .card .tag { display: inline-block; background: rgba(201,168,76,0.12); color: var(--hijau-muda); font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 2px; margin-top: 0.75rem; }
+
+  /* KURBAN HIGHLIGHT */
+  .kurban-banner {
+    background: var(--emas);
+    border-radius: 4px;
+    padding: 1.5rem 2rem;
+    display: flex; align-items: center; gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .kurban-banner .kb-icon { font-size: 2.5rem; }
+  .kurban-banner h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--hijau); margin-bottom: 0.3rem; }
+  .kurban-banner p { font-size: 0.85rem; color: rgba(26,71,49,0.75); line-height: 1.6; }
+  .kurban-banner a { margin-left: auto; background: var(--hijau); color: var(--emas); padding: 0.7rem 1.5rem; border-radius: 2px; text-decoration: none; font-size: 0.85rem; font-weight: 500; white-space: nowrap; }
+
+  .cta { background: var(--hijau); padding: 4rem 2.5rem; text-align: center; }
+  .cta h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--putih); margin-bottom: 0.75rem; }
+  .cta p { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 2rem; }
+  footer { background: #111; padding: 1.75rem; text-align: center; }
+  footer p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+  footer a { color: var(--emas); text-decoration: none; }
+
+  @media(max-width: 768px) {
+    nav { padding: 1rem 1.25rem; }
+    .hero { padding: 4rem 1.25rem 3rem; }
+    .layanan { padding: 3rem 1.25rem; }
+    .kurban-banner a { margin-left: 0; margin-top: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">BJGrup <span>/ BJFarm</span></a>
+</nav>
+
+<section class="hero">
+  <div class="unit-badge">Unit Usaha · BJGrup</div>
+  <h1><em>BJFarm</em><br>Dari Alam, Untuk Kebaikan</h1>
+  <p>Pertanian, peternakan, perikanan, dan perkebunan yang dikelola modern — menghasilkan produk segar berkualitas dengan prinsip keberlanjutan dan keberkahan.</p>
+  <a href="https://wa.me/6282110438809?text=Halo%20BJFarm%2C%20saya%20ingin%20tanya%20tentang%20produk%20dan%20layanan." class="wa-btn">
+    <svg class="wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Hubungi via WhatsApp
+  </a>
+</section>
+
+<!-- TAB MENU -->
+<div class="tab-wrap">
+  <div class="tab-menu">
+    <button class="tab-btn active" onclick="switchTab('peternakan', this)">🐄 Peternakan</button>
+    <button class="tab-btn" onclick="switchTab('pertanian', this)">🌾 Pertanian</button>
+    <button class="tab-btn" onclick="switchTab('perikanan', this)">🐟 Perikanan</button>
+    <button class="tab-btn" onclick="switchTab('perkebunan', this)">🌴 Perkebunan</button>
+  </div>
+</div>
+
+<!-- TAB: PETERNAKAN -->
+<div id="tab-peternakan" class="tab-content active">
+  <section class="layanan">
+    <div class="section-label"><span>Peternakan</span></div>
+    <h2>Hewan Ternak Sehat & Berkualitas</h2>
+    <p>BJFarm menyediakan hewan ternak pilihan untuk kebutuhan kurban, aqiqah, dan konsumsi sehari-hari — dipelihara dengan standar kesehatan tinggi.</p>
+    <div class="kurban-banner">
+      <div class="kb-icon">🕋</div>
+      <div>
+        <h3>Layanan Kurban & Aqiqah</h3>
+        <p>Pesan hewan kurban dan aqiqah sekarang — sapi dan kambing sehat, proses amanah, distribusi daging ke yang membutuhkan.</p>
+      </div>
+      <a href="https://wa.me/6282110438809?text=Halo%20BJFarm%2C%20saya%20mau%20pesan%20hewan%20kurban.">Pesan Sekarang</a>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🐂</div>
+        <h3>Sapi Kurban</h3>
+        <p>Sapi jantan sehat dengan bobot sesuai syariat — tersedia berbagai ukuran, cocok untuk 7 orang per ekor.</p>
+        <span class="tag">Kurban & Konsumsi</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🐐</div>
+        <h3>Kambing & Domba</h3>
+        <p>Kambing dan domba pilihan untuk kurban maupun aqiqah — sehat, gemuk, dan memenuhi syarat syar'i.</p>
+        <span class="tag">Kurban & Aqiqah</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🐔</div>
+        <h3>Ayam Kampung & Telur</h3>
+        <p>Ayam kampung dan ayam petelur segar — dipelihara dengan pakan alami tanpa hormon tambahan.</p>
+        <span class="tag">Produksi Harian</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚚</div>
+        <h3>Antar & Distribusi Daging</h3>
+        <p>Layanan penyembelihan, pengemasan, dan distribusi daging kurban/aqiqah langsung ke mustahiq dan pemesan.</p>
+        <span class="tag">Layanan Lengkap</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TAB: PERTANIAN -->
+<div id="tab-pertanian" class="tab-content">
+  <section class="layanan">
+    <div class="section-label"><span>Pertanian</span></div>
+    <h2>Hasil Bumi Segar Langsung dari Ladang</h2>
+    <p>Produk pertanian berkualitas — sayur, buah, dan padi — ditanam dengan metode modern yang ramah lingkungan dan bebas dari pestisida berlebihan.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🥬</div>
+        <h3>Sayuran Segar</h3>
+        <p>Bayam, kangkung, cabai, tomat, dan berbagai sayuran lainnya — dipanen setiap hari untuk menjaga kesegaran.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🍅</div>
+        <h3>Buah-buahan</h3>
+        <p>Pepaya, pisang, semangka, melon, dan buah musiman lainnya — manis alami tanpa pemanis buatan.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌾</div>
+        <h3>Padi & Beras</h3>
+        <p>Beras berkualitas dari sawah sendiri — pulen, wangi, dan bebas campuran bahan kimia berbahaya.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📦</div>
+        <h3>Paket Sayur Mingguan</h3>
+        <p>Langganan paket sayur segar mingguan — dikirim langsung ke rumah Anda dengan harga petani.</p>
+        <span class="tag">Bisa Langganan</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TAB: PERIKANAN -->
+<div id="tab-perikanan" class="tab-content">
+  <section class="layanan">
+    <div class="section-label"><span>Perikanan</span></div>
+    <h2>Ikan Segar dari Kolam Bersih</h2>
+    <p>Budidaya ikan air tawar dengan sistem kolam terkelola — ikan sehat, tanpa antibiotik berlebihan, dan kaya nutrisi alami.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🐟</div>
+        <h3>Ikan Lele</h3>
+        <p>Lele konsumsi ukuran optimal — gurih, segar, dan siap diolah. Tersedia dalam berbagai kuantitas.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🐠</div>
+        <h3>Ikan Nila & Gurame</h3>
+        <p>Nila dan gurame segar dari kolam — cocok untuk rumahan, warung makan, maupun katering.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🦐</div>
+        <h3>Udang & Ikan Mas</h3>
+        <p>Udang air tawar dan ikan mas pilihan — segar, bersih, siap masak langsung dari kolam panen.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏪</div>
+        <h3>Grosir untuk Pedagang</h3>
+        <p>Tersedia pembelian grosir untuk pedagang pasar, warung, dan restoran — harga terbaik, kualitas terjamin.</p>
+        <span class="tag">Harga Grosir</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TAB: PERKEBUNAN -->
+<div id="tab-perkebunan" class="tab-content">
+  <section class="layanan">
+    <div class="section-label"><span>Perkebunan</span></div>
+    <h2>Komoditas Perkebunan Unggulan</h2>
+    <p>Perkebunan dikelola secara profesional untuk menghasilkan komoditas bernilai tinggi yang mendukung ketahanan pangan dan ekonomi lokal.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🌴</div>
+        <h3>Kelapa Sawit</h3>
+        <p>Kebun sawit produktif dengan hasil CPO berkualitas — dikelola dengan standar keberlanjutan lingkungan.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">☕</div>
+        <h3>Kopi</h3>
+        <p>Kopi arabika dan robusta dari kebun sendiri — biji segar, aroma khas, siap roasting maupun green bean.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🍫</div>
+        <h3>Kakao & Cokelat</h3>
+        <p>Biji kakao pilihan untuk industri cokelat lokal — fermentasi alami, rasa khas, kualitas ekspor.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🥥</div>
+        <h3>Kelapa & Produk Turunan</h3>
+        <p>Kelapa segar, minyak kelapa murni (VCO), dan santan — dari kebun sendiri hingga siap konsumsi.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="cta">
+  <h2>Pesan Produk BJFarm Sekarang</h2>
+  <p>Dari ladang, kandang, kolam, dan kebun — langsung ke tangan Anda.</p>
+  <a href="https://wa.me/6282110438809?text=Halo%20BJFarm%2C%20saya%20mau%20pesan%20produk." class="wa-btn">
+    <svg class="wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.473-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Chat Sekarang
+  </a>
+</section>
+
+<footer>
+  <p><a href="/">← Kembali ke BJGrup</a> &nbsp;·&nbsp; © 2025 Berkah Jum'at Grup</p>
+</footer>
+
+<script>
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
