@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berkah Jum'at Grup</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hijau: #1a4731;
+    --hijau-muda: #2d6a4f;
+    --emas: #c9a84c;
+    --emas-muda: #e8c96a;
+    --krem: #f8f4ed;
+    --putih: #ffffff;
+    --teks-gelap: #1a1a1a;
+    --teks-abu: #555;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--krem);
+    color: var(--teks-gelap);
+    overflow-x: hidden;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: var(--hijau);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--emas);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+  .logo span { color: var(--putih); font-weight: 400; }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--emas-muda); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--hijau);
+    display: flex; align-items: center;
+    padding: 8rem 2.5rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; right: -100px; top: -100px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+  .hero::after {
+    content: '';
+    position: absolute; right: 50px; top: 50px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.1);
+  }
+  .hero-content { max-width: 700px; position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--emas-muda);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: var(--putih);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--emas);
+  }
+  .hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.75;
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-emas {
+    background: var(--emas);
+    color: var(--hijau);
+    padding: 0.85rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    transition: background 0.2s;
+  }
+  .btn-emas:hover { background: var(--emas-muda); }
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.35);
+    color: var(--putih);
+    padding: 0.85rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--emas); color: var(--emas); }
+
+  /* ABOUT */
+  .about {
+    background: var(--putih);
+    padding: 6rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .about-label {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .about-label span {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--hijau-muda);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .about-label::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--emas);
+  }
+  .about h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.3rem;
+    font-weight: 600;
+    color: var(--hijau);
+    line-height: 1.3;
+    margin-bottom: 1.25rem;
+  }
+  .about p {
+    color: var(--teks-abu);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  .about-stat {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-top: 2rem;
+  }
+  .stat-box {
+    border-left: 2px solid var(--emas);
+    padding-left: 1rem;
+  }
+  .stat-box strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--hijau);
+    font-weight: 600;
+  }
+  .stat-box span {
+    font-size: 0.82rem;
+    color: var(--teks-abu);
+  }
+  .about-visual {
+    background: var(--hijau);
+    border-radius: 4px;
+    padding: 2.5rem;
+    aspect-ratio: 1;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-visual::before {
+    content: '﷽';
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    font-size: 0.75rem;
+    color: rgba(201,168,76,0.4);
+    letter-spacing: 0.05em;
+  }
+  .ornament-circle {
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+  .ornament-circle2 {
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.3);
+  }
+  .about-visual-text {
+    position: relative; z-index: 1;
+  }
+  .about-visual-text p {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+  }
+  .about-visual-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--emas);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .about-visual-text small {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
+  }
+
+  /* UNIT USAHA */
+  .units {
+    padding: 6rem 2.5rem;
+    background: var(--krem);
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+  .section-header .label {
+    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .section-header .label span {
+    font-size: 0.75rem;
+    color: var(--hijau-muda);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+  }
+  .section-header .label::before,
+  .section-header .label::after {
+    content: '';
+    flex: 0 0 30px; height: 1px;
+    background: var(--emas);
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--hijau);
+    font-weight: 600;
+  }
+
+  .unit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .unit-card {
+    background: var(--putih);
+    border: 1px solid rgba(26,71,49,0.08);
+    border-radius: 4px;
+    padding: 1.75rem;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .unit-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--emas);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .unit-card:hover { transform: translateY(-4px); }
+  .unit-card:hover::after { transform: scaleX(1); }
+  .unit-icon {
+    width: 44px; height: 44px;
+    background: rgba(26,71,49,0.07);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+    font-size: 1.3rem;
+  }
+  .unit-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--hijau);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+  .unit-card p {
+    font-size: 0.85rem;
+    color: var(--teks-abu);
+    line-height: 1.7;
+  }
+
+  /* SOSIAL */
+  .sosial {
+    background: var(--hijau);
+    padding: 6rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .sosial::before {
+    content: '';
+    position: absolute; left: -200px; top: 50%;
+    transform: translateY(-50%);
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.1);
+  }
+  .sosial-content { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+  .sosial .label {
+    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .sosial .label span {
+    font-size: 0.75rem;
+    color: rgba(201,168,76,0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .sosial .label::before, .sosial .label::after {
+    content: ''; flex: 0 0 25px; height: 1px;
+    background: rgba(201,168,76,0.4);
+  }
+  .sosial h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--putih);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    line-height: 1.3;
+  }
+  .sosial h2 em { font-style: italic; color: var(--emas); }
+  .sosial p {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  .sosial-divider {
+    width: 50px; height: 1px;
+    background: var(--emas);
+    margin: 2rem auto;
+    opacity: 0.5;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #111;
+    padding: 2.5rem;
+    text-align: center;
+  }
+  footer .logo-footer {
+    font-family: 'Playfair Display', serif;
+    color: var(--emas);
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .about {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      padding: 4rem 1.5rem;
+    }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    nav ul { display: none; }
+    .about-visual { aspect-ratio: 4/3; }
+    .units { padding: 4rem 1.5rem; }
+    .sosial { padding: 4rem 1.5rem; }
+  }
+
+  /* ANIMASI */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content > * {
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.55s; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Berkah Jum'at <span>Grup</span></div>
+  <ul>
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#unit">Unit Usaha</a></li>
+    <li><a href="#sosial">Sosial</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Bisnis · Sosial · Berkah</div>
+    <h1>Satu Grup,<br><em>Banyak Manfaat</em></h1>
+    <p>Berkah Jum'at Grup mengintegrasikan berbagai sektor usaha untuk menciptakan dampak nyata bagi masyarakat — dari bisnis hingga kegiatan sosial melalui Yayasan Nasi Jum'at.</p>
+    <div class="hero-btns">
+      <a href="#unit" class="btn-emas">Lihat Unit Usaha</a>
+      <a href="#tentang" class="btn-outline">Tentang Kami</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="tentang">
+  <div>
+    <div class="about-label"><span>Tentang Kami</span></div>
+    <h2>Bisnis yang Berakar pada Nilai Keberkahan</h2>
+    <p>Berkah Jum'at Grup adalah inisiatif usaha yang bertujuan memberikan kontribusi positif bagi masyarakat melalui berbagai bidang usaha yang saling bersinergi.</p>
+    <p>Kami percaya bahwa bisnis yang sukses bukan hanya soal keuntungan, tetapi juga dampak yang ditinggalkan bagi komunitas sekitarnya.</p>
+    <div class="about-stat">
+      <div class="stat-box">
+        <strong>8</strong>
+        <span>Unit Usaha</span>
+      </div>
+      <div class="stat-box">
+        <strong>1</strong>
+        <span>Yayasan Sosial</span>
+      </div>
+    </div>
+  </div>
+  <div class="about-visual">
+    <div class="ornament-circle"></div>
+    <div class="ornament-circle2"></div>
+    <div class="about-visual-text">
+      <p>Misi Utama</p>
+      <h3>Bisnis Berdampak, Berkah Merata</h3>
+      <small>Sebagian keuntungan untuk Yayasan Nasi Jum'at</small>
+    </div>
+  </div>
+</section>
+
+<!-- UNIT USAHA -->
+<section class="units" id="unit">
+  <div class="section-header">
+    <div class="label"><span>Unit Usaha</span></div>
+    <h2>8 Bidang Usaha, Satu Visi</h2>
+  </div>
+  <div class="unit-grid">
+    <div class="unit-card">
+      <div class="unit-icon">🛍️</div>
+      <h3>BJ Shop</h3>
+      <p>Perdagangan dan e-commerce produk kebutuhan sehari-hari dengan kualitas terbaik dan harga terjangkau.</p>
+    </div>
+    <div class="unit-card">
+      <div class="unit-icon">🏠</div>
+      <h3>BJ Property</h3>
+      <p>Pengembangan dan investasi properti komersial & residensial dengan standar kualitas tinggi.</p>
+    </div>
+    <div class="unit-card">
+      <div class="unit-icon">🚗</div>
+      <h3>BJ Rental</h3>
+      <p>Layanan persewaan kendaraan — mobil, motor, hingga peralatan berat — fleksibel dan terjangkau.</p>
+    </div>
+    <div class="unit-card">
+      <div class="unit-icon">🌿</div>
+      <h3>BJ Farm</h3>
+      <p>Pertanian dan peternakan modern yang menghasilkan produk sehat berkualitas tinggi secara berkelanjutan.</p>
+    </div>
+    <div class="unit-card">
+      <div class="unit-icon">🍽️</div>
+      <h3>BJ Food & Beverage</h3>
+      <p>Produk makanan dan minuman berkualitas dari bahan segar dengan proses produksi higienis.</p>
+    </div>
+    <div class="unit-card">
+      <div class="unit-icon">✈️</div>
+      <h3>BJ Travel</h3>
+      <p>Layanan perjalanan dan pariwisata lengkap — tiket, akomodasi, hingga pengaturan tur.</p>
+    </div>
+    <div class="unit-card">
+      <div class="unit-icon">🎭</div>
+      <h3>BJ Entertainment</h3>
+      <p>Hiburan seni, budaya, dan pertunjukan yang menyenangkan sekaligus bermanfaat bagi masyarakat.</p>
+    </div>
+    <div class="unit-card">
+      <div class="unit-icon">📚</div>
+      <h3>BJ Learning</h3>
+      <p>Kursus, pelatihan kerja, seminar, dan workshop untuk meningkatkan pengetahuan dan keterampilan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOSIAL -->
+<section class="sosial" id="sosial">
+  <div class="sosial-content">
+    <div class="label"><span>Kontribusi Sosial</span></div>
+    <h2>Setiap Transaksi,<br><em>Ikut Berbagi</em></h2>
+    <p>Sebagian keuntungan dari setiap unit usaha BJ Grup dialokasikan untuk membiayai kegiatan sosial di <strong style="color:var(--emas-muda)">Yayasan Nasi Jum'at</strong> — membantu masyarakat yang membutuhkan, terutama dalam hal pangan dan kebutuhan dasar.</p>
+    <div class="sosial-divider"></div>
+    <p style="font-size:0.85rem; color:rgba(255,255,255,0.4)">Karena keberkahan sejati hadir ketika manfaat dirasakan bersama.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo-footer">Berkah Jum'at Grup</div>
+  <p>© 2025 Berkah Jum'at Grup · Bisnis dengan Hati</p>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const el = document.querySelector(a.getAttribute('href'));
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
